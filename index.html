@@ -406,16 +406,16 @@
         let inputHTML = '';
         if (question.type === 'radio') {
           inputHTML = question.options.map((opt, i) => `
-            <label class="flex items-center gap-3 bg-gray-800/50 p-4 rounded-lg border border-gray-700 hover:border-amber-500 cursor-pointer transition">
+            <label class="flex items-center gap-3 bg-gray-200 p-4 rounded-lg border border-gray-400 hover:border-amber-500 cursor-pointer transition">
               <input type="radio" name="answer" value="${opt}" class="w-5 h-5 text-amber-600">
-              <span class="text-gray-200">${opt}</span>
+              <span class="text-black">${opt}</span>
             </label>
           `).join('');
         } else {
           inputHTML = `
             <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
-              class="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-gray-200 focus:border-amber-500 focus:outline-none">
-            ${question.hint ? `<div class="text-xs text-gray-500 mt-2">힌트: ${question.hint}</div>` : ''}
+              class="w-full bg-white border border-gray-400 rounded-lg p-4 text-black focus:border-amber-500 focus:outline-none">
+            ${question.hint ? `<div class="text-xs text-gray-700 mt-2">힌트: ${question.hint}</div>` : ''}
           `;
         }
 
@@ -427,7 +427,7 @@
           ` : ''}
           
           <div class="bg-gray-400 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
-            <div class="text-amber-400 font-bold mb-4">Q${currentQuestion + 1}.</div>
+            <div class="text-amber-600 font-bold mb-4">Q${currentQuestion + 1}.</div>
             <div class="text-black mb-6 leading-relaxed">${question.q}</div>
             <div class="space-y-3">
               ${inputHTML}
