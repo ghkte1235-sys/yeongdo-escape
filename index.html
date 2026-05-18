@@ -319,25 +319,30 @@
               answer: ['아가미']
             },
             {
-              q: '평상시에는 투명한 색이지만 빛이 있는 곳에서는 육각형 모양의 얇은 구아닌 결정층을 통해 빛을 반사시켜 푸른 빛을 낸다. 바다의 사파이어라고 불린다.',
-              type: 'text',
-              answer: ['사파리나']
-            },
-            {
-              q: '뿔말류의 한종으로, 한개의 긴 뿔과 두개의 짧은 뿔을 가지고 있다. 앞쪽 뿔은 스스로 떼어낼 수 있다.',
-              type: 'text',
-              answer: ['세라티움 펄카', '세라티움펄카']
-            },
-            {
-              q: '\'바다의 천사\'라는 별명을 가지고 있으며, 일반적으로 북극에서 서식한다.',
-              type: 'text',
-              answer: ['클리오네']
-            },
-            {
-              q: '녹조류의 한 종으로, 많은 유생생물들의 식물성 먹이로 이용되고 있다. 항산화 물질이 풍부하여 식품 및 화장품의 원료로 이용하기도 한다.',
-              type: 'text',
-              answer: ['클로렐라']
-            },
+{
+  q: '평상시에는 투명한 색이지만 빛이 있는 곳에서는 육각형 모양의 얇은 구아닌 결정층을 통해 빛을 반사시켜 푸른 빛을 낸다. 바다의 사파이어라고 불린다.',
+  type: 'text',
+  answer: ['사파리나'],
+  image: 'sapphirina.jpg'  // 👈 이미지 추가
+},
+{
+  q: '뿔말류의 한종으로, 한개의 긴 뿔과 두개의 짧은 뿔을 가지고 있다. 앞쪽 뿔은 스스로 떼어낼 수 있다.',
+  type: 'text',
+  answer: ['세라티움 펄카', '세라티움펄카'],
+  image: 'ceratium.jpg'  // 👈 이미지 추가
+},
+{
+  q: '\'바다의 천사\'라는 별명을 가지고 있으며, 일반적으로 북극에서 서식한다.',
+  type: 'text',
+  answer: ['클리오네'],
+  image: 'clione.jpg'  // 👈 이미지 추가
+},
+{
+  q: '녹조류의 한 종으로, 많은 유생생물들의 식물성 먹이로 이용되고 있다. 항산화 물질이 풍부하여 식품 및 화장품의 원료로 이용하기도 한다.',
+  type: 'text',
+  answer: ['클로렐라'],
+  image: 'chlorella.jpg'  // 👈 이미지 추가
+},
             {
               q: '미디어 아트의 \'시대를 항해하다\'는 바다를 인류의 이동을 단절하는 장벽에서 길로 만들어준 해운의 시작과 미래를 나타내는 작품입니다. 인류는 바다라는 \'장벽\'을 건너 새로운 세상을 만나는 \'길\'을 개척해왔습니다. 이제 미래의 해운은 단순히 물자를 옮기는 것을 넘어, 해양 생태계를 보존하고 환경과 공존하는 \'이 가치\'를 향해 나아가고 있습니다. 설명문의 마지막 문단에 등장하는 다섯 글자의 핵심 단어는 무엇일까요?',
               type: 'text',
@@ -396,40 +401,46 @@
       }
 
       // 퀴즈 (기존 방식 유지)
-      const question = mission.questions[currentQuestion];
-      if (question && currentStep === 2) {
-        progress.textContent = `미션 ${mission.id} - 문제 ${currentQuestion + 1}/${mission.questions.length}`;
-        
-        let inputHTML = '';
-        if (question.type === 'radio') {
-          inputHTML = question.options.map((opt, i) => `
-            <label class="flex items-center gap-3 bg-gray-800/50 p-4 rounded-lg border border-gray-700 hover:border-amber-500 cursor-pointer transition">
-              <input type="radio" name="answer" value="${opt}" class="w-5 h-5 text-amber-600">
-              <span class="text-gray-200">${opt}</span>
-            </label>
-          `).join('');
-        } else {
-          inputHTML = `
-            <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
-              class="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-gray-200 focus:border-amber-500 focus:outline-none">
-            ${question.hint ? `<div class="text-xs text-gray-500 mt-2">힌트: ${question.hint}</div>` : ''}
-          `;
-        }
+const question = mission.questions[currentQuestion];
+if (question && currentStep === 2) {
+  progress.textContent = `미션 ${mission.id} - 문제 ${currentQuestion + 1}/${mission.questions.length}`;
+  
+  let inputHTML = '';
+  if (question.type === 'radio') {
+    inputHTML = question.options.map((opt, i) => `
+      <label class="flex items-center gap-3 bg-gray-800/50 p-4 rounded-lg border border-gray-700 hover:border-amber-500 cursor-pointer transition">
+        <input type="radio" name="answer" value="${opt}" class="w-5 h-5 text-amber-600">
+        <span class="text-gray-200">${opt}</span>
+      </label>
+    `).join('');
+  } else {
+    inputHTML = `
+      <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
+        class="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-gray-200 focus:border-amber-500 focus:outline-none">
+      ${question.hint ? `<div class="text-xs text-gray-500 mt-2">힌트: ${question.hint}</div>` : ''}
+    `;
+  }
 
-        content.innerHTML = `
-          <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
-            <div class="text-amber-400 font-bold mb-4">Q${currentQuestion + 1}.</div>
-            <div class="text-gray-200 mb-6 leading-relaxed">${question.q}</div>
-            <div class="space-y-3">
-              ${inputHTML}
-            </div>
-          </div>
-          <button onclick="checkAnswer()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6">
-            정답 확인
-          </button>
-        `;
-        return;
-      }
+  content.innerHTML = `
+    ${question.image ? `
+      <div class="mb-4">
+        <img src="${question.image}" alt="참고 이미지" class="w-full rounded-lg shadow-lg">
+      </div>
+    ` : ''}
+    
+    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
+      <div class="text-amber-400 font-bold mb-4">Q${currentQuestion + 1}.</div>
+      <div class="text-gray-200 mb-6 leading-relaxed">${question.q}</div>
+      <div class="space-y-3">
+        ${inputHTML}
+      </div>
+    </div>
+    <button onclick="checkAnswer()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6">
+      정답 확인
+    </button>
+  `;
+  return;
+}
 
       // 미션 완료
       if (currentStep === 3) {
