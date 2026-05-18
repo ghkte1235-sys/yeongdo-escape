@@ -22,363 +22,276 @@
 , 0 0 30px 
 ; }
     }
+    .story-image {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
   </style>
 </head>
-<body class="text-gray-100 min-h-screen flex flex-col">
-
-  <!-- 상단 진행 표시 -->
-  <header class="bg-gray-900/50 backdrop-blur-sm p-4 sticky top-0 z-10">
-    <div class="max-w-md mx-auto flex justify-between items-center">
-      <div id="progress" class="text-sm text-amber-400"></div>
-      <div id="clues" class="flex gap-2"></div>
+<body class="min-h-screen text-white p-4">
+  <div class="max-w-2xl mx-auto">
+    <!-- 상단 진행 상황 -->
+    <div class="mb-6 text-center">
+      <div id="progress" class="text-amber-400 font-bold text-lg mb-4"></div>
     </div>
-  </header>
 
-  <!-- 메인 콘텐츠 -->
-  <main class="flex-1 max-w-md mx-auto w-full px-6 py-8">
-    <div id="content" class="space-y-6"></div>
-  </main>
+    <!-- 메인 콘텐츠 -->
+    <div id="content" class="mb-6"></div>
 
-  <!-- 하단 인벤토리 -->
-  <footer class="bg-gray-900/80 backdrop-blur-sm p-4 sticky bottom-0">
-    <div class="max-w-md mx-auto">
+    <!-- 하단 인벤토리 -->
+    <div class="bg-gray-900/50 backdrop-blur-sm rounded-lg p-4 border border-amber-600/30">
       <div class="text-xs text-amber-400 mb-2">획득한 단서</div>
-      <div id="inventory" class="flex gap-3 justify-center"></div>
+      <div id="inventory" class="flex gap-2 flex-wrap min-h-[60px] items-center justify-center">
+        <div class="text-gray-500 text-sm">아직 획득한 단서가 없습니다</div>
+      </div>
     </div>
-  </footer>
+  </div>
 
   <script>
-    // ========== 데이터 정의 ==========
+    // ========== 게임 데이터 ==========
     const gameData = {
       intro: {
-        type: 'story',
-        title: '영도할매의 부탁',
-        content: `스르르… 어디선가 바닷바람과 함께 낯선 목소리가 들려옵니다.
-
-"잠시 멈춰서 들어보겠니? 내 이름은 영도할매. 이 섬을 천 년 동안 지켜온 바다의 수호신이란다.
-
-너희가 지금 서 있는 이곳, 영도(影島)는 본래 '절영도(絕影島)'라 불렸던 곳이지. '그림자조차 따라잡지 못할 만큼 빠른 천리마들이 살던 섬'이라는 뜻이란다.
-
-그런데 어느 날, 우두머리 천리마 '풍영(風影)'이 사라졌어. 누군가 그를 7개의 봉인으로 가둬버린 거야.
-
-그 봉인의 단서들이 바로 이 박물관 곳곳에 숨겨져 있단다. 바람(風), 시간(時), 용기(勇), 지혜(智), 인(仁), 신뢰(信), 예의(禮)…
-
-자, 4층 항해관부터 시작하자꾸나. 엘리베이터를 타고 가장 위층으로 올라가렴. 거기서부터 한 층씩 내려오면 된단다."`
+        image: 'prologue.jpg'
       },
       missions: [
         {
           id: 1,
-          title: '1단계 - 바다의 길잡이',
-          location: '4층 항해관',
-          story: '"첫 번째 봉인을 풀기 위해서는 항해의 지혜가 필요하단다."',
-          activity: '항해 도구들을 살펴보세요.',
+          image: 'mission1.jpg',
+          location: '위치: 4층 항해관 → 「바다의 길잡이」 코너',
+          title: '바다의 길잡이를 찾아라',
+          story: '"풍랑을 가른 자는\n옛 항해사들의 도구를 사용했단다.\n별과 나침반, 그리고 바람을 읽는 법…\n우리 조상들이 망망대해에서\n길을 찾던 비밀을 너희도 알아내야 해."',
+          activity: '탐험 미션: 「바다의 길잡이」 코너의 고대 전시물 중 항해 도구를 살펴보세요.',
           questions: [
             {
-              q: '수평선과 천체 사이를 측정하는데 사용되며, 360도를 8등분한 45도의 부채꼴 형태이며 항해 중인 선박의 현재 위치를 알아내기 위해 태양과 달, 별의 고도를 측정하는데 사용되는 항해도구는?',
+              text: 'Q1. 옛날 선원들이 방향을 찾기 위해 사용한 자석 도구의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['팔분의']
+              answer: ['나침반']
             },
             {
-              q: '다음중 항해 도구가 아닌것은?',
-              type: 'radio',
-              options: ['① 나침반(패철)', '② 측우기', '③ 해도(海圖)', '④ 천체관측기구'],
-              answer: '② 측우기'
+              text: 'Q2. 별의 높이를 재서 배의 위치를 알아내는 도구의 이름은 무엇일까요?',
+              type: 'text',
+              answer: ['육분의']
             },
             {
-              q: '이 사람은 영국의 유명한 항해가로, 태평양을 여러 차례 탐험하며 하와이를 비롯한 많은 섬들을 발견 했어요. 남쪽 끝 부터 북쪽 끝까지 바다를 탐험하며 세계 여러 지역을 유럽 사람들에게 알린 인물 입니다. 또한 그의 항해 기록은 지도와 항해기로 남아 지금까지 전해지고 있습니다. 이 사람의 이름은 무엇일까요?',
+              text: 'Q3. 동서양을 이어주던 중요한 무역 길로, 도자기와 향신료를 실은 배들이 이용한 이 길의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['제임스 쿡', '제임스쿡']
+              answer: ['무역풍', '무역 풍']
             }
           ],
           clue: '風',
-          knowledge: '항해 도구의 발전은 대항해시대를 가능하게 했습니다!'
+          knowledge: '나침반과 육분의는 대항해시대의 필수 항해 도구였습니다!'
         },
         {
           id: 2,
-          title: '2단계 - 항해의 시대',
-          location: '4층 항해관',
-          story: '"두 번째 봉인은 시간의 흐름 속에 숨어있단다."',
-          activity: '세계의 배들을 관찰하세요.',
+          image: 'mission2.jpg',
+          location: '위치: 4층 항해관 → 「시간과 경도」 전시',
+          title: '시간의 비밀을 풀어라',
+          story: '"시간을 지배하는 자가\n바다를 지배한단다.\n옛날 선원들은 시간을 재서\n자신의 위치를 알아냈지.\n그 비밀을 찾아보렴."',
+          activity: '탐험 미션: 「시간과 경도」 전시에서 시간 측정 도구들을 관찰하세요.',
           questions: [
             {
-              q: '크리스토퍼 콜롬버스의 첫 번째 항해에 사용된 3척의 선박 중 한척으로, 카리브해에서 좌초된 배의 이름은?',
+              text: 'Q1. 해의 그림자로 시간을 재던 고대 도구의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['산타마리아호', '산타마리아']
+              answer: ['해시계']
             },
             {
-              q: '아랍과 인도양, 동아프리카 일대에서 주로 사용되던 범선으로, 8세기 후반 홍해-페르시아만-아라비아해 연안-동남아시아를 항해하는데 사용된 배의 종류는?',
+              text: 'Q2. 바다에서 정확한 시간을 재기 위해 발명된 정밀 시계의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['다우선']
+              answer: ['크로노미터']
             },
             {
-              q: '동서양을 바다로 이어주던 중요한 무역길로, 도자기와 향신료 같은 물건들이 활발하게 오갔던 이 길의 이름은 무엇일까요? (해상 0000)',
+              text: 'Q3. 지구의 세로선을 나타내며, 시간 차이로 위치를 알 수 있게 하는 선의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['실크로드', '해상실크로드']
+              answer: ['경도']
             }
           ],
           clue: '時',
-          knowledge: '해상 실크로드는 동서양 문명 교류의 핵심 통로였습니다!'
+          knowledge: '크로노미터의 발명으로 바다에서 정확한 위치를 알 수 있게 되었어요!'
         },
         {
           id: 3,
-          title: '3단계 - 우리나라의 배',
-          location: '4층 항해관',
-          story: '"세 번째 봉인은 용기의 상징 속에 있단다."',
-          activity: '조선시대 배들을 살펴보세요.',
+          image: 'mission3.jpg',
+          location: '위치: 3층 해양문화관 → 「조선의 바다」 섹션',
+          title: '용기의 상징을 찾아라',
+          story: '"용맹한 장군이\n바다를 지켰단다.\n그의 배와 전략은\n적들을 물리쳤지.\n그 용기를 기억하렴."',
+          activity: '탐험 미션: 「조선의 바다」 섹션에서 조선 수군의 역사를 탐험하세요.',
           questions: [
             {
-              q: '고려 성종이 세금으로 곡식을 걷는 제도를 만들며 세곡을 운반하면서 발달하게 된 배는 무엇일까요?',
+              text: 'Q1. 임진왜란 때 조선 수군을 이끌고 23전 23승을 거둔 장군의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['조운선']
+              answer: ['이순신']
             },
             {
-              q: '16~17세기 일본 에도 막부의 지배자는 무역 이익을 독점하고 통제하기 위해 해외 무역 허가증인 \'주인장\'을 발행했습니다. 이 공식 허가증을 받은 무역선을 000 이라고 불렀습니다. 000은 무엇일까요?',
+              text: 'Q2. 철갑으로 덮인 조선의 전투 함선 이름은 무엇일까요?',
               type: 'text',
-              answer: ['주인선']
+              answer: ['거북선']
             },
             {
-              q: '각 지방의 유력 상인들과 다이묘들은 이 허가증을 받아 동남아시아 각지로 무역선을 파견했으며, 일본의 쇄국 정책이 본격화되기 직전인 1635년까지, 000은 활발하게 교역하였습니다. 이때, 일본의 000이 직접 방문하여 교류한 국가가 아닌 곳은 어디일까요?',
+              text: 'Q3. 이순신 장군이 왜군을 크게 무찌른 유명한 해전의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['영국']
-            },
-            {
-              q: '우리나라의 전통 톱으로 주로 원목을 자를 때 사용한다. 크게 통낭, 톱자루, 동발, 탕개의 네 부분으로 구성되는 이 톱의 이름은?',
-              type: 'text',
-              answer: ['탕개톱']
-            },
-            {
-              q: '배를 건조할 때 사용한 못으로, 못 머리가 둥근 것과 네모난 형태가 있는 이 못의 이름은?',
-              type: 'text',
-              answer: ['쇠못']
-            },
-            {
-              q: '거북선은 조선 시대의 대표적인 전함인 판옥선 위에 덮개를 씌워 창과 칼을 꽂고, 뱃머리에는 00라는 신령한 동물의 용머리를 붙인 배입니다. 00은 무엇일까요?',
-              type: 'text',
-              answer: ['신귀']
+              answer: ['한산도대첩', '한산도 대첩']
             }
           ],
           clue: '勇',
-          knowledge: '거북선은 세계 최초의 철갑선으로 임진왜란의 승리를 이끌었습니다!'
+          knowledge: '이순신 장군은 23전 23승의 불패 신화를 이룬 위대한 해군 제독입니다!'
         },
         {
           id: 4,
-          title: '4단계 - 기록 속 우리 바다',
-          location: '3층 해양문화관',
-          story: '"네 번째 봉인은 지혜의 기록 속에 있단다."',
-          activity: '해양 기록물들을 살펴보세요.',
+          image: 'mission4.jpg',
+          location: '위치: 4층 항해관 → 「조선의 과학」 코너',
+          title: '지혜의 발명품을 찾아라',
+          story: '"지혜로운 발명가가\n하늘과 땅을 관찰했단다.\n그의 도구들은\n세상을 이해하는 열쇠였지.\n그 지혜를 배우렴."',
+          activity: '탐험 미션: 「조선의 과학」 코너에서 조선시대 과학 기구들을 관찰하세요.',
           questions: [
             {
-              q: '토끼의 간을 먹어야 병이 낫는 용왕을 위하여 별주부(자라)가 토끼를 용궁에 데려오지만, 토끼가 간을 빼놓고 다닌다는 말로 잔꾀를 부려 도망친다는 내용의 고전 소설?',
+              text: 'Q1. 별의 위치를 관측하던 조선시대 천문 관측 기구의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['별토전', '별주부전']
+              answer: ['혼천의']
             },
             {
-              q: '하멜이 1653년 일본 나가사키로 가던 중 태풍을 만나 일행 36명과 함께 표착한 곳은?',
+              text: 'Q2. 비의 양을 재던 세계 최초의 기상 관측 기구 이름은 무엇일까요?',
               type: 'text',
-              answer: ['제주도', '제주']
+              answer: ['측우기']
             },
             {
-              q: '1488년 부친상을 당해 제주에서 나주로 가던 중 풍랑을 만나 17일만에 중국에 표착한 후 북경을 거쳐 육지로 귀국했던 기록인 \'표해록\'의 저자는?',
+              text: 'Q3. 이 과학 기구들을 발명한 조선시대 최고의 과학자는 누구일까요?',
               type: 'text',
-              answer: ['최부']
-            },
-            {
-              q: '1763년 제 11차 조선통신사 일행을 기록한 좌목이며, 당시 통신사에 참여한 정사 조엄, 부사 이인배, 종사관 김상익 및 조선인 477명의 직책, 역할, 주요 직책의 이름 등이 기록되어 있는 이 책은?',
-              type: 'text',
-              answer: ['조선통신사일행좌목']
-            },
-            {
-              q: '\'귀로도중도\'는 에도에서 조선까지의 여정을 상세하게 그린 파노라마 형식의 그림입니다. 귀로도중도의 1권에는 에도로부터 나고야를 지나 00까지, 2권에는 00에서 조선까지로 구성됩니다. 00은 어디일까요?',
-              type: 'text',
-              answer: ['교토']
-            },
-            {
-              q: '「기록 속 우리 바다」 코너에서 가장 큰 유물을 찾아주세요. 전시관 외부에서도 볼 수 있고 내부에서도 볼 수 있답니다!',
-              type: 'text',
-              answer: ['조선통신사선', '통신사선']
+              answer: ['장영실']
             }
           ],
           clue: '智',
-          knowledge: '조선통신사 기록물은 2017년 유네스코 세계기록유산에 등재되었습니다!'
+          knowledge: '장영실은 조선시대 최고의 과학자로 다양한 천문 관측 기구를 만들었어요!'
         },
         {
           id: 5,
-          title: '5단계 - 바다와 예술',
-          location: '3층 해양문화관',
-          story: '"다섯 번째 봉인은 예술의 아름다움 속에 숨어있단다."',
-          activity: '해양 예술 작품들을 감상하세요.',
+          image: 'mission5.jpg',
+          location: '위치: 2층 해양생물관 → 「바다 생물의 세계」',
+          title: '인(仁)의 마음을 찾아라',
+          story: '"바다 생물들은\n서로 돕고 살아간단다.\n그들의 공존을\n관찰해보렴.\n인(仁)의 마음을 배우게 될 거야."',
+          activity: '탐험 미션: 「바다 생물의 세계」에서 해양 생물들의 공생 관계를 관찰하세요.',
           questions: [
             {
-              q: '송용도는 조선통신사의 수행 화원이었던 이 사람의 작품입니다. 이 사람의 이름은?',
+              text: 'Q1. 바다에서 가장 큰 포유류로, 노래로 소통하는 동물은 무엇일까요?',
               type: 'text',
-              answer: ['이의양']
+              answer: ['고래']
             },
             {
-              q: '죽은 이의 영혼을 극락 세계로 보내는 영가천도 의식을 그린 불교식 회화인 이 그림은 중앙에는 지장 보살과 인로왕 보살이 이끄는 반야용선이 아미타불이 있는 서방 정토로 향하고 있는 모습이 그려져 있습니다. 이 그림은?',
+              text: 'Q2. 사람을 구해주는 이야기로 유명한, 똑똑한 바다 포유류는 무엇일까요?',
               type: 'text',
-              answer: ['감로도']
+              answer: ['돌고래']
             },
             {
-              q: '세계 여러 곳에서 조개껍질을 이용해 공예품을 만들었지만, 이를 독보적인 예술로 발전시킨 곳은 우리나라를 포함한 동아시아뿐입니다. 다음 설명을 읽고 이 공예 기법의 이름을 맞춰주세요. "전복이나 소라 같은 조개류의 반짝이는 껍질(자개)을 얇게 갈아 문양을 만들고, 이를 가구 등의 기물 표면에 박아 넣는 기법을 \'00\'이라고 합니다. 00은?',
+              text: 'Q3. 투명한 몸을 가지고 있으며, 바다를 떠다니는 생물은 무엇일까요?',
               type: 'text',
-              answer: ['나전', '나전칠기']
-            },
-            {
-              q: '\'대모\'는 이 동물의 한 종류입니다. 구름무늬가 있는 노란 등껍질과 배를 감싸고 있는 껍데기는 옛날부터 최고급 공예품의 재료로 사용되었습니다. 이 동물은 주로 열대 바다에 서식하기 때문에, 과거 우리나라에서는 아주 귀한 수입품으로 취급되었습니다. 이 동물은?',
-              type: 'text',
-              answer: ['거북이', '거북']
-            },
-            {
-              q: '칼자루와 칼집에 상어피를 감싼 칼이며, 칼코등이에 두 마리에 용이 장식되어 있는 이것은?',
-              type: 'text',
-              answer: ['상어피 쌍룡도', '상어피쌍룡도', '쌍룡도']
-            },
-            {
-              q: '정사각형의 몸체에 뚜껑이 달려있어 인장을 보관하기 위해 제작된 상자입니다. 어피로 감싸 만들었으며, 안전한 보관을 위해 자물쇠가 달려 있는 이것은?',
-              type: 'text',
-              answer: ['어피 인장함', '어피인장함', '인장함']
-            },
-            {
-              q: '벼루, 먹, 붓 연적 등을 넣어 두는 상자이다. 나전을 활용한 산수문, 십장생 문양이 앞면 전체에 장식되어 있는 이것은?',
-              type: 'text',
-              answer: ['나전칠 연상', '나전칠연상', '연상']
+              answer: ['해파리']
             }
           ],
           clue: '仁',
-          knowledge: '나전칠기는 한국의 대표적인 전통 공예로 세계적으로 인정받고 있습니다!'
+          knowledge: '바다 생물들은 서로 돕고 공존하며 해양 생태계를 유지합니다!'
         },
         {
           id: 6,
-          title: '6단계 - 바다와 사람들',
-          location: '2층 해양생활관',
-          story: '"여섯 번째 봉인은 바다 사람들의 삶 속에 있단다."',
-          activity: '해양 생활 도구들을 살펴보세요.',
+          image: 'mission6.jpg',
+          location: '위치: 4층 항해관 → 「항로 표지」 전시',
+          title: '신뢰의 등불을 찾아라',
+          story: '"어둠 속에서\n빛을 밝히는 것이 있단다.\n선원들은 그 빛을 믿고\n안전하게 항구로 돌아왔지.\n그 신뢰를 찾아보렴."',
+          activity: '탐험 미션: 「항로 표지」 전시에서 항해 안전 시설들을 살펴보세요.',
           questions: [
             {
-              q: '과거 해녀들은 면으로 된 옷을 입고 물질을 했습니다. 이때, 옆트임이 있어 물속에서 입고 벗기 편하게 고안된 하의의 이름은? (네글자)',
+              text: 'Q1. 밤에 빛을 비춰 배들에게 길을 알려주는 높은 건축물의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['물소중이']
+              answer: ['등대']
             },
             {
-              q: '과거 해녀들은 면으로 된 옷을 입고 물질을 했습니다. 이때, 1930년대 이후부터 겹쳐 입기 시작한 저고리 형태의 상의의 이름은? (세글자)',
+              text: 'Q2. 바다에 떠 있으면서 항로를 표시하는 표지의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['물적삼']
+              answer: ['부표', '부이']
             },
             {
-              q: '해녀들이 성게, 문어. 소라 등을 채취할 때 사용하는 도구로, 물 밑을 이동할 때 바위에 걸어 고정하는 용도로 사용되는 도구의 이름은?',
+              text: 'Q3. 바다의 깊이와 암초 위치를 표시한 항해용 지도의 이름은 무엇일까요?',
               type: 'text',
-              answer: ['호맹이']
-            },
-            {
-              q: '바닷물에 잠겨 있다가 바닷물이 빠질 때 육지로 드러나는 습지와 같은 땅을 갯벌이라고 합니다. 우리나라 갯벌은 면적이 국토의 2.5%에 달합니다. 이러한 환경적 특수성 때문에 독특한 갯벌 어업들이 만들어졌습니다. 무안, 신안 갯벌 낙지 맨손어업과 함께 한국의 국가중요어업유산으로 지정하여 보존하고 있는 어업의 이름은?',
-              type: 'text',
-              answer: ['보성 뻘배 어업', '보성뻘배어업', '뻘배어업']
-            },
-            {
-              q: '섬진강 하류에서 재첩을 잡을 때 사용 하던 것으로, 재첩을 끌어서 채집한 후, 개흙을 씻어 내기 위해 사용한 것은?',
-              type: 'text',
-              answer: ['재첩망']
-            },
-            {
-              q: '낙지를 잡기 위해 근현대에 사용된 일종의 삽으로, 좁은 삽날로 갯벌을 파서 낙지를 잡는 이것은?',
-              type: 'text',
-              answer: ['가래']
-            },
-            {
-              q: '통나무 가운데를 파서 만든 함지로 위쪽의 넓은 테두리로 굴을 까는 작업대로 사용한 이것은?',
-              type: 'text',
-              answer: ['굴함지']
-            },
-            {
-              q: '갯벌에서 꼬막을 채취하는데 사용한 도구이며, 갯벌을 훑으며 개흙과 함께 꼬막을 걷어 올려 채취하는 것은?',
-              type: 'text',
-              answer: ['써레']
+              answer: ['해도']
             }
           ],
           clue: '信',
-          knowledge: '제주 해녀 문화는 2016년 유네스코 인류무형문화유산으로 등재되었습니다!'
+          knowledge: '등대는 수백 년 동안 선박의 안전한 항해를 지켜온 바다의 파수꾼입니다!'
         },
         {
           id: 7,
-          title: '7단계 - 바다 생물의 신비',
-          location: '1층 해양생물관',
-          story: '"마지막 봉인이다. 바다 생물들의 신비를 이해해야 풍영을 구할 수 있단다."',
-          activity: '해양 생물들을 관찰하세요.',
+          image: 'mission7.jpg',
+          location: '위치: 2층 해양생물관 전체',
+          title: '예(禮)의 완성 - 최종 관문',
+          story: '"마지막 시험이란다.\n바다의 모든 지식을\n총동원해야 할 거야.\n예(禮)를 갖춰\n바다를 대하는 마음을 보여주렴."',
+          activity: '탐험 미션: 2층 해양생물관 전체를 탐험하며 최종 문제들을 해결하세요.',
           questions: [
             {
-              q: '최대 몸길이 20cm까지 성장하며, 몸은 푸른색을 띤 회갈색 바탕에 5줄의 넓은 흑갈색 가로띠를 가진 물고기는?',
-              type: 'text',
-              answer: ['해포리']
-            },
-            {
-              q: '성격이 온순하며 폴립이나 연산호를 먹고 살아갑니다. 치어기에 2개의 줄이 있으나 성장하면서 갈색으로 변하고 5~6개의 세로줄이 나타나며 꼬리지느러미가 노란색으로 변하는 물고기는?',
-              type: 'text',
-              answer: ['세일핀탱']
-            },
-            {
-              q: '치어기에 전체적으로 노란색이지만, 성장하면서 몸 색이 옅어지고 색이 절반으로 나뉘며, 어깨 위쪽에 오렌지색의 기다란 반점을 가지게 되는 물고기는?',
+              text: 'Q1. 가슴지느러미에 주황색 반점이 있는 가오리의 이름은 무엇일까요?',
               type: 'text',
               answer: ['오렌지숄더서전']
             },
             {
-              q: '노란 바탕에 표범을 연상케하는 갈색의 반점들이 벌집 같은 무늬를 그리고 있는 것이 특징인 물고기는?',
+              text: 'Q2. 몸에 범무늬 같은 줄무늬가 있는 가오리의 이름은 무엇일까요?',
               type: 'text',
               answer: ['범무늬소녀가오리']
             },
             {
-              q: '눈과 눈 사이에 깊은 골이 있어 마치 코가 양쪽으로 나뉜듯한 특이한 모습을 하고 있는 물고기는?',
+              text: 'Q3. 코 부분이 납작하고 넓은 가오리의 이름은 무엇일까요?',
               type: 'text',
               answer: ['플랩노즈레이']
             },
             {
-              q: '이 생물의 피는 사람처럼 붉은 색이 아닐 무색에 가깝습니다. 산소를 운반하기 위해 철 대신 구리 성분이 든 00000을 가지고 있으며, 산소와 만나면 푸른색으로 변하기 때문입니다. 00000은 무엇인가요?',
+              text: 'Q4. 투구게의 피가 파란색인 이유는 무엇 때문일까요? (산소를 운반하는 물질)',
               type: 'text',
               answer: ['헤모시아닌', '헤포시아닌']
             },
             {
-              q: '피 속에는 \'LAL (Limulus Amebocyte Lysate)\'이라는 성분이 들어있어, 아주 적은 양의 독소나 오염물질도 민감하게 찾아내 굳어버리는 특성이 있어 전 세계의 의약품이 안전한지 검사하는 데 결정적인 도움을 주고 있으며, 위 문제에서 말한 이 생물은?',
+              text: 'Q5. 4억 5천만 년 전부터 살아온 "살아있는 화석"으로 불리는 생물은 무엇일까요?',
               type: 'text',
               answer: ['투구게']
             },
             {
-              q: '낙지의 심장은 세개 입니다. 온몸에 피를 전달하는 1개의 체심장과 000에 피를 공급하여 산소를 빠르게 받아 들이는 2개의 000 심장으로 이루어져 있습니다. 000은 무엇인가요?',
+              text: 'Q6. 투구게가 숨을 쉬는 신체 부위는 무엇일까요?',
               type: 'text',
               answer: ['아가미']
             },
             {
-              q: '평상시에는 투명한 색이지만 빛이 있는 곳에서는 육각형 모양의 얇은 구아닌 결정층을 통해 빛을 반사시켜 푸른 빛을 낸다. 바다의 사파이어라고 불린다.',
+              text: 'Q7. 긴 뿔 같은 돌기가 있는 플랑크톤의 이름은 무엇일까요?',
               type: 'text',
               answer: ['사파리나']
             },
             {
-              q: '뿔말류의 한종으로, 한개의 긴 뿔과 두개의 짧은 뿔을 가지고 있다. 앞쪽 뿔은 스스로 떼어낼 수 있다.',
+              text: 'Q8. 뿔 모양의 돌기가 두 개 있는 플랑크톤의 이름은 무엇일까요?',
               type: 'text',
               answer: ['세라티움 펄카', '세라티움펄카']
             },
             {
-              q: '\'바다의 천사\'라는 별명을 가지고 있으며, 일반적으로 북극에서 서식한다.',
+              text: 'Q9. "바다의 천사"라고 불리는 투명한 플랑크톤의 이름은 무엇일까요?',
               type: 'text',
               answer: ['클리오네']
             },
             {
-              q: '녹조류의 한 종으로, 많은 유생생물들의 식물성 먹이로 이용되고 있다. 항산화 물질이 풍부하여 식품 및 화장품의 원료로 이용하기도 한다.',
+              text: 'Q10. 녹색을 띠는 단세포 조류로, 건강식품으로도 사용되는 플랑크톤의 이름은 무엇일까요?',
               type: 'text',
               answer: ['클로렐라']
             },
             {
-              q: '미디어 아트의 \'시대를 항해하다\'는 바다를 인류의 이동을 단절하는 장벽에서 길로 만들어준 해운의 시작과 미래를 나타내는 작품입니다. 인류는 바다라는 \'장벽\'을 건너 새로운 세상을 만나는 \'길\'을 개척해왔습니다. 이제 미래의 해운은 단순히 물자를 옮기는 것을 넘어, 해양 생태계를 보존하고 환경과 공존하는 \'이 가치\'를 향해 나아가고 있습니다. 설명문의 마지막 문단에 등장하는 다섯 글자의 핵심 단어는 무엇일까요?',
+              text: 'Q11. 미래 세대도 바다를 누릴 수 있도록 환경을 보호하는 개념을 무엇이라고 할까요?',
               type: 'text',
               answer: ['지속가능성']
             }
           ],
           clue: '禮',
-          knowledge: '투구게는 4억 5천만 년 전부터 지구에 살아온 살아있는 화석입니다. 투구게의 파란 피는 의약품 안전성 검사에 필수적으로 사용되고 있답니다!'
+          knowledge: '투구게는 4억 5천만 년 전부터 지구에 살아온 살아있는 화석입니다!'
         }
-      ]
+      ],
+      epilogue: {
+        image: 'epilogue.jpg'
+      }
     };
 
     // ========== 상태 관리 ==========
-    let currentStep = 0; // 0: intro, 1~: mission.intro, questions, complete
+    let currentStep = 0;
     let currentMission = 0;
     let currentQuestion = 0;
     let collectedClues = [];
@@ -388,15 +301,14 @@
       const content = document.getElementById('content');
       const progress = document.getElementById('progress');
       
-      // 인트로
+      // 프롤로그 (이미지만 표시)
       if (currentStep === 0) {
         progress.textContent = '프롤로그';
         content.innerHTML = `
-          <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
-            <h1 class="text-2xl font-bold text-amber-400 mb-4 text-center">${gameData.intro.title}</h1>
-            <div class="text-gray-300 leading-relaxed whitespace-pre-line text-sm">${gameData.intro.content}</div>
+          <div class="mb-6">
+            <img src="${gameData.intro.image}" alt="프롤로그" class="story-image">
           </div>
-          <button onclick="nextStep()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6">
+          <button onclick="nextStep()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition">
             탐험 시작하기
           </button>
         `;
@@ -406,56 +318,33 @@
       const mission = gameData.missions[currentMission];
       if (!mission) return;
 
-      // 미션 소개
+      // 미션 소개 (이미지만 표시)
       if (currentStep === 1) {
         progress.textContent = `미션 ${mission.id}`;
         content.innerHTML = `
-          <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
-            <div class="text-xs text-amber-400 mb-2">${mission.location}</div>
-            <h2 class="text-xl font-bold text-amber-300 mb-4">${mission.title}</h2>
-            <div class="text-gray-300 leading-relaxed text-sm mb-4">${mission.story}</div>
-            <div class="bg-gray-900/50 p-4 rounded border-l-4 border-amber-500">
-              <div class="text-xs text-amber-400 mb-1">미션 활동</div>
-              <div class="text-gray-300 text-sm">${mission.activity}</div>
-            </div>
+          <div class="mb-6">
+            <img src="${mission.image}" alt="미션 ${mission.id}" class="story-image">
           </div>
-          <button onclick="nextStep()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6">
+          <button onclick="nextStep()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition">
             퀴즈 시작하기
           </button>
         `;
         return;
       }
 
-      // 퀴즈
+      // 퀴즈 (기존 텍스트 방식 유지)
       const question = mission.questions[currentQuestion];
       if (question && currentStep === 2) {
         progress.textContent = `미션 ${mission.id} - 문제 ${currentQuestion + 1}/${mission.questions.length}`;
         
-        let inputHTML = '';
-        if (question.type === 'radio') {
-          inputHTML = question.options.map((opt, i) => `
-            <label class="flex items-center gap-3 bg-gray-800/50 p-4 rounded-lg border border-gray-700 hover:border-amber-500 cursor-pointer transition">
-              <input type="radio" name="answer" value="${opt}" class="w-5 h-5 text-amber-600">
-              <span class="text-gray-200">${opt}</span>
-            </label>
-          `).join('');
-        } else {
-          inputHTML = `
-            <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
-              class="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-gray-200 focus:border-amber-500 focus:outline-none">
-            ${question.hint ? `<div class="text-xs text-gray-500 mt-2">힌트: ${question.hint}</div>` : ''}
-          `;
-        }
-
         content.innerHTML = `
-          <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30">
-            <div class="text-amber-400 font-bold mb-4">Q${currentQuestion + 1}.</div>
-            <div class="text-gray-200 mb-6 leading-relaxed">${question.q}</div>
-            <div class="space-y-3">
-              ${inputHTML}
-            </div>
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-amber-600/30 mb-6">
+            <div class="text-gray-300 leading-relaxed mb-4">${question.text}</div>
+            <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
+              class="w-full bg-gray-900/50 border border-amber-600/50 rounded-lg p-4 text-gray-200 text-center text-lg focus:border-amber-500 focus:outline-none placeholder-gray-500">
           </div>
-          <button onclick="checkAnswer()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6">
+          
+          <button onclick="checkAnswer()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition">
             정답 확인
           </button>
         `;
@@ -497,40 +386,32 @@
     function checkAnswer() {
       const mission = gameData.missions[currentMission];
       const question = mission.questions[currentQuestion];
-      let userAnswer = '';
+      const userAnswer = document.getElementById('textAnswer').value.trim();
 
-      if (question.type === 'radio') {
-        const selected = document.querySelector('input[name="answer"]:checked');
-        if (!selected) {
-          alert('답을 선택해주세요!');
-          return;
-        }
-        userAnswer = selected.value;
-      } else {
-        userAnswer = document.getElementById('textAnswer').value.trim();
-        if (!userAnswer) {
-          alert('답을 입력해주세요!');
-          return;
-        }
+      if (!userAnswer) {
+        alert('답을 입력해주세요!');
+        return;
       }
 
       // 정답 확인
       let isCorrect = false;
       if (Array.isArray(question.answer)) {
-        isCorrect = question.answer.some(ans => userAnswer.includes(ans) || userAnswer === ans);
+        isCorrect = question.answer.some(ans => 
+          userAnswer.toLowerCase().includes(ans.toLowerCase()) || 
+          userAnswer.toLowerCase() === ans.toLowerCase()
+        );
       } else {
-        isCorrect = userAnswer === question.answer;
+        isCorrect = userAnswer.toLowerCase() === question.answer.toLowerCase();
       }
 
       if (isCorrect) {
         alert('✅ 정답입니다!');
         currentQuestion++;
         
-        // 미션의 모든 문제를 풀었으면
         if (currentQuestion >= mission.questions.length) {
           collectedClues.push(mission.clue);
           updateInventory();
-          currentStep = 3; // 미션 완료 화면
+          currentStep = 3;
           currentQuestion = 0;
         }
         render();
@@ -542,55 +423,58 @@
     function nextMission() {
       currentMission++;
       if (currentMission >= gameData.missions.length) {
-        // 최종 완료
-        const content = document.getElementById('content');
-        const progress = document.getElementById('progress');
-        progress.textContent = '🎉 완료!';
-        content.innerHTML = `
-          <div class="bg-gradient-to-br from-amber-900/50 to-gray-800/50 backdrop-blur-sm rounded-lg p-8 border-2 border-amber-500">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 text-center">모든 봉인을 풀었습니다!</h2>
-            <div class="text-gray-300 leading-relaxed mb-6 text-center">
-              "잘했구나! 너희가 모은 단서들을 보렴.<br>
-              風(바람), 時(시간), 勇(용기), 智(지혜), 仁(인), 信(신뢰), 禮(예의)…<br><br>
-              이 일곱 가지가 모이면 마지막 단서가 나타난단다.<br>
-              그것은 바로… <strong class="text-amber-400 text-xl">영(影)</strong>이란다.<br><br>
-              풍영(風影)의 '영'이자, 영도(影島)의 '영'이지.<br>
-              그림자처럼 빠른 천리마는 이제 자유로워졌단다.<br><br>
-              고맙구나, 용감한 탐험가들아!"
-            </div>
-            <div class="flex justify-center gap-3 flex-wrap mb-6">
-              ${collectedClues.map(clue => `
-                <div class="clue-badge bg-amber-900/50 border-2 border-amber-500 rounded-lg px-4 py-2 text-3xl">
-                  ${clue}
-                </div>
-              `).join('')}
-              <div class="clue-badge bg-red-900/50 border-2 border-red-500 rounded-lg px-4 py-2 text-3xl">
-                影
-              </div>
-            </div>
-            <div class="text-center text-sm text-gray-400">
-              국립해양박물관 방문을 기념합니다 🌊
-            </div>
-          </div>
-        `;
+        showEpilogue();
         return;
       }
-      currentStep = 1; // 다음 미션 소개로
+      currentStep = 1;
       render();
+    }
+
+    function showEpilogue() {
+      const content = document.getElementById('content');
+      const progress = document.getElementById('progress');
+      progress.textContent = '🎉 완료!';
+      
+      content.innerHTML = `
+        <div class="mb-6">
+          <img src="${gameData.epilogue.image}" alt="에필로그" class="story-image">
+        </div>
+        
+        <div class="bg-gradient-to-br from-amber-900/50 to-gray-800/50 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500 mt-6">
+          <h2 class="text-xl font-bold text-amber-400 mb-4 text-center">획득한 모든 단서</h2>
+          <div class="flex justify-center gap-3 flex-wrap">
+            ${collectedClues.map(clue => `
+              <div class="clue-badge bg-amber-900/50 border-2 border-amber-500 rounded-lg px-4 py-2 text-3xl">
+                ${clue}
+              </div>
+            `).join('')}
+            <div class="clue-badge bg-red-900/50 border-2 border-red-500 rounded-lg px-4 py-2 text-3xl">
+              影
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center text-sm text-gray-400 mt-6">
+          국립해양박물관 방문을 기념합니다 🌊
+        </div>
+      `;
     }
 
     function updateInventory() {
       const inventory = document.getElementById('inventory');
-      inventory.innerHTML = collectedClues.map(clue => `
-        <div class="clue-badge bg-amber-900/50 border-2 border-amber-500 rounded-lg px-4 py-2 text-2xl">
-          ${clue}
-        </div>
-      `).join('');
+      if (collectedClues.length === 0) {
+        inventory.innerHTML = '<div class="text-gray-500 text-sm">아직 획득한 단서가 없습니다</div>';
+      } else {
+        inventory.innerHTML = collectedClues.map(clue => `
+          <div class="clue-badge bg-amber-900/50 border-2 border-amber-500 rounded-lg px-4 py-2 text-2xl">
+            ${clue}
+          </div>
+        `).join('');
+      }
     }
 
     // ========== 초기화 ==========
     render();
-    updateInventory();
   </script>
 </body>
 </html>
