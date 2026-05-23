@@ -12,7 +12,9 @@
   
   <style>
     body {
-      background: linear-gradient(180deg, #0f0f1e 0%, #000000 100%);
+      background: linear-gradient(180deg, 
+ 0%, 
+ 100%);
       font-family: 'Noto Sans KR', sans-serif;
     }
     .clue-badge {
@@ -28,12 +30,12 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
       margin-bottom: 1.5rem;
     }
-    /* 추가된 에필로그용 스타일 */
     .mystic-font {
       font-family: 'Gowun Batang', serif;
     }
     .gold-border {
-      border: 2px solid #c9a054;
+      border: 2px solid 
+;
       box-shadow: 0 0 15px rgba(201, 160, 84, 0.2);
     }
   </style>
@@ -143,13 +145,16 @@
             { q: '이 생물의 피는 사람처럼 붉은 색이 아닐 무색에 가깝습니다. 산소를 운반하기 위해 철 대신 구리 성분이 든 00000을 가지고 있으며, 산소와 만나면 푸른색으로 변하기 때문입니다. 00000은 무엇인가요?', type: 'text', answer: ['헤모시아닌', '헤포시아닌'] },
             { q: '피 속에는 \'LAL (Limulus Amebocyte Lysate)\'이라는 성분이 들어있어, 아주 적은 양의 독소나 오염물질도 민감하게 찾아내 굳어버리는 특성이 있어 전 세계의 의약품이 안전한지 검사하는 데 결정적인 도움을 주고 있으며, 위 문제에서 말한 이 생물은?', type: 'text', answer: ['투구게'] },
             { q: '낙지의 심장은 세개 입니다. 온몸에 피를 전달하는 1개의 체심장과 000에 피를 공급하여 산소를 빠르게 받아 들이는 2개의 000 심장으로 이루어져 있습니다. 000은 무엇인가요?', type: 'text', answer: ['아가미'] },
-            { q: '평상시에는 투명한 색이지만 빛이 있는 곳에서는 육각형 모양의 얇은 구아닌 결정층을 통해 빛을 반사시켜 푸른 빛을 낸다. 바다의 사파이어라고 불린다.', type: 'text', answer: ['사파리나'], image: 'sapphirina.jpg' },
+{ q: '평상시에는 투명한 색이지만 빛이 있는 곳에서는 육각형 모양의 얇은 구아닌 결정층을 통해 빛을 반사시켜 푸른 빛을 낸다. 바다의 사파이어라고 불린다.', type: 'text', answer: ['사파리나'], image: 'sapphirina.jpg' },
             { q: '뿔말류의 한종으로, 한개의 긴 뿔과 두개의 짧은 뿔을 가지고 있다. 앞쪽 뿔은 스스로 떼어낼 수 있다.', type: 'text', answer: ['세라티움 펄카', '세라티움펄카'], image: 'ceratium.jpg' },
             { q: '\'바다의 천사\'라는 별명을 가지고 있으며, 일반적으로 북극에서 서식한다.', type: 'text', answer: ['클리오네'], image: 'clione.jpg' },
             { q: '녹조류의 한 종으로, 많은 유생생물들의 식물성 먹이로 이용되고 있다. 항산화 물질이 풍부하여 식품 및 화장품의 원료로 이용하기도 한다.', type: 'text', answer: ['클로렐라'], image: 'chlorella.jpg' },
-            { q: '미디어 아트의 \'시대를 항해하다\'는 바다를 인류의 이동을 단절하는 장벽에서 길로 만들어준 해운의 시작과 미래를 나타내는 작품입니다. 인류는 바다라는 \'장벽\'을 건너 새로운 세상을 만나는 \'길\'을 개척해왔습니다. 이제 미래의 해운은 단순히 물자를 옮기는 것을 넘어, 해양 생태계를 보존하고 환경과 공존하는 \'이 가치\'를 향해 나아가고 있습니다. 설명문의 마지막 문단에 등장하는 다섯 글자의 핵심 단어는 무엇일까요?', type: 'text', answer: ['지속가능성'] }
+            { q: '미디어 아트의 \'시대를 항해하다\'는 바다를 인류의 이동을 단절하는 장벽에서 길로 만들어준 해운의 시작과 미래를 나타내는 작품입니다. 인류는 바다라는 \'장벽\'을 건너 새로운 세상을 만나는 \'길\'을 개척해왔습니다. 이제 미래의 해운은 단순히 물자를 옮기는 것을 넘어, 해양 생태계를 보존하고 환경과 공존하는 \'이 가치\'를 향해 나아가고 있습니다. 설명문의 마지막 문단에 등장하는 다섯 글자의 핵심 단어는 무엇일까요?', type: 'text', answer: ['지속가능성'] },
+            { q: '', type: 'text', answer: ['그림자', '영', '그림자 영'], image: 'final_mission.jpg', hint: '힌트 1: 이 박물관이 위치한 섬 이름과 관련 있어요.\n힌트 2: 빛이 있으면 생기는 거에요.' }
           ],
-          clueChar: '命', clueName: '생명', knowledge: '투구게는 4억 5천만 년 전부터 지구에 살아온 살아있는 화석입니다. 파란 피는 의약품 검사에 필수적으로 사용됩니다!'
+          clueChar: '影',
+          clueName: '그림자',
+          knowledge: '모든 단서를 모아 천리마 풍영의 봉인을 해제했습니다! 절영도의 전설이 되살아났습니다.'
         }
       ],
       epilogue: { image: 'epilogue.jpg' }
@@ -219,7 +224,7 @@
           inputHTML = `
             <input type="text" id="textAnswer" placeholder="답을 입력하세요" 
               class="w-full bg-white border border-gray-400 rounded-lg p-4 text-black font-bold focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-inner">
-            ${question.hint ? `<div class="text-xs text-gray-700 mt-2">힌트: ${question.hint}</div>` : ''}
+            ${question.hint ? `<div class="text-xs text-gray-700 mt-2 whitespace-pre-line">${question.hint}</div>` : ''}
           `;
         }
 
@@ -230,13 +235,19 @@
             </div>
           ` : ''}
           
+          ${question.q ? `
           <div class="bg-gray-300 backdrop-blur-sm rounded-xl p-6 border-b-4 border-amber-600 shadow-md">
             <div class="text-amber-700 text-lg font-bold mb-4">Q${currentQuestion + 1}.</div>
-            <div class="text-gray-900 font-medium mb-6 leading-relaxed">${question.q}</div>
+            <div class="text-gray-900 font-medium mb-6 leading-relaxed whitespace-pre-line">${question.q}</div>
             <div class="space-y-3">
               ${inputHTML}
             </div>
           </div>
+          ` : `
+          <div class="space-y-3">
+            ${inputHTML}
+          </div>
+          `}
           <button onclick="checkAnswer()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6 shadow-lg">
             정답 확인
           </button>
@@ -264,7 +275,7 @@
           </div>
 
           <button onclick="nextMission()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition mt-6 shadow-lg">
-            ${currentMission < gameData.missions.length - 1 ? '다음 미션으로 이동' : '최종 단서 확인하기'}
+            ${currentMission < gameData.missions.length - 1 ? '다음 미션으로 이동' : '에필로그 보기'}
           </button>
         `;
         return;
@@ -354,38 +365,44 @@
                 <div class="text-sm text-amber-300 mt-1 font-bold">${clue.name}</div>
               </div>
             `).join('')}
-            <div class="clue-badge bg-red-900/60 border-2 border-red-500 rounded-lg px-4 py-2 shadow-md text-center text-red-200">
-              <div class="text-3xl">影</div>
-              <div class="text-sm mt-1 text-red-300 font-bold">그림자</div>
-            </div>
           </div>
         </div>
 
-        <section class="bg-[#161b22] rounded-2xl p-6 border border-gray-800 space-y-4 mb-8 shadow-xl">
-            <div class="flex items-center space-x-2 text-[#e5c158]">
+        <section class="bg-[
+] rounded-2xl p-6 border border-gray-800 space-y-4 mb-8 shadow-xl">
+            <div class="flex items-center space-x-2 text-[
+]">
                 <span class="text-sm font-bold">Ⅲ. 에필로그</span>
                 <span class="text-xs text-gray-400">— 영도할매의 작별 인사 —</span>
             </div>
             
-            <div class="mystic-font text-base leading-relaxed text-gray-300 space-y-4 bg-[#0d1116] p-5 rounded-xl border border-gray-800 italic">
-                <p>“ 자, 모든 봉인이 풀렸어. 풍영이 다시 바람이 되어 달리고 있구나. ”</p>
-                <p>“ 오늘 너희가 발견한 것은 단순한 퀴즈의 답이 아니란다. 바로 우리 바다가 천 년 동안 품어온 이야기들이지. ”</p>
-                <p>“ 4층에서는 바다를 건넌 조상들의 지혜와 용기를 만났고, 3층에서는 바다를 기록하고, 노래하고, 살아온 이들의 삶을 만났단다. 이 모든 것이 바로 <span class="text-[#e5c158] font-bold not-italic">‘해양 문화’</span>란다. ”</p>
-                <p>“ 가족과 함께 기억해주렴. 그리고 다음에는 친구들에게도 이 이야기를 들려주렴. 언젠가 다시 만나자구나, 작은 탐험가들아. ”</p>
-                <p class="text-right text-sm text-[#e5c158] font-bold not-italic mt-4">— 영도할매가... —</p>
+            <div class="mystic-font text-base leading-relaxed text-gray-300 space-y-4 bg-[
+] p-5 rounded-xl border border-gray-800 italic">
+                <p>" 자, 모든 봉인이 풀렸어. 풍영이 다시 바람이 되어 달리고 있구나. "</p>
+                <p>" 오늘 너희가 발견한 것은 단순한 퀴즈의 답이 아니란다. 바로 우리 바다가 천 년 동안 품어온 이야기들이지. "</p>
+                <p>" 4층에서는 바다를 건넌 조상들의 지혜와 용기를 만났고, 3층에서는 바다를 기록하고, 노래하고, 살아온 이들의 삶을 만났단다. 이 모든 것이 바로 <span class="text-[
+] font-bold not-italic">'해양 문화'</span>란다. "</p>
+                <p>" 가족과 함께 기억해주렴. 그리고 다음에는 친구들에게도 이 이야기를 들려주렴. 언젠가 다시 만나자구나, 작은 탐험가들아. "</p>
+                <p class="text-right text-sm text-[
+] font-bold not-italic mt-4">— 영도할매가... —</p>
             </div>
         </section>
 
-        <section class="bg-[#161b22] rounded-2xl p-6 border border-gray-800 space-y-6 mb-8 shadow-xl">
+        <section class="bg-[
+] rounded-2xl p-6 border border-gray-800 space-y-6 mb-8 shadow-xl">
             <div class="space-y-2">
                 <label for="familyName" class="block text-sm font-medium text-gray-400">
-                    인증서에 새길 <span class="text-[#e5c158]">가족 이름</span>을 입력해 주세요:
+                    인증서에 새길 <span class="text-[
+]">가족 이름</span>을 입력해 주세요:
                 </label>
                 <input type="text" id="familyName" placeholder="예: 홍길동 가족" 
-                       class="w-full bg-[#0f1216] border border-gray-600 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-[#e5c158] transition duration-200 text-sm">
+                       class="w-full bg-[
+] border border-gray-600 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:border-[
+] transition duration-200 text-sm">
             </div>
 
-            <div class="bg-[#fcfaf2] text-gray-900 rounded-xl p-6 gold-border text-center space-y-6 bg-[radial-gradient(#f4f0e3_1px,transparent_1px)] [background-size:16px_16px]">
+            <div class="bg-[
+] text-gray-900 rounded-xl p-6 gold-border text-center space-y-6 bg-[radial-gradient(#f4f0e3_1px,transparent_1px)] [background-size:16px_16px]">
                 <div class="space-y-1">
                     <p class="text-[10px] uppercase tracking-widest font-bold text-amber-800">Certificate of Maritime Explorer</p>
                     <h2 class="text-xl font-bold text-amber-950 mystic-font">영도 해양 문화 탐험가 인증서</h2>
